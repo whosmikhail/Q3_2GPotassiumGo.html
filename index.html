@@ -1,1 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            form {
+                display: block;
+                border: 4px dotted black;
+                padding: 8px;
+                background-color: rgb(141, 198, 179);
+            }
+             fieldset {
+                display: grid;
+             }
 
+            .blurred {
+                font-style: oblique;
+                
+            }
+
+            body {
+                background-color: rgb(138, 168, 93);
+            }
+        </style>
+    </head>
+    <body>
+        <form method="post" action="submit" onsubmit="confirmSubmit()" onreset="confirmReset()"> 
+            <fieldset>
+                <label for="id">Student ID:</label>
+                <input id="id" type="number" onblur="StyleCheck()"> 
+                <label for="name">Full Name:</label>
+                <input id="name" type="text" onblur="StyleCheck()">
+                <label for="bday">Birthday:</label>
+                <input id="bday" type="date" onblur="StyleCheck()"> 
+                <label for="mail">Email:</label>
+                <input id="mail" type="email" onblur="StyleCheck()">
+            </fieldset>
+            <fieldset>
+                <label for="phone">Mobile Phone Number:</label>
+                <input id="phone" type="text" onblur="StyleCheck()">
+                <label for="grade">Grade Level:</label>
+                <select id="grade">
+                    <option value="12">Grade 12</option>
+                    <option value="11">Grade 11</option>
+                    <option value="10">Grade 10</option>
+                    <option value="9">Grade 9</option>
+                    <option value="8">Grade 8</option>
+                    <option value="7">Grade 7</option>
+                    <option value="6">Grade 6</option>
+                    <option value="5">Grade 5</option>
+                    <option value="4">Grade 4</option>
+                    <option value="3">Grade 3</option>
+                    <option value="2">Grade 2</option>
+                    <option value="1">Grade 1</option>
+                </select>
+                <label for="hans">Intern/Extern: </label> 
+                <div id="hans">
+                    <label for="rey">Intern: </label>
+                    <input id="rey" type="radio" value="intern">
+                    <label for="leian">Extern: </label>
+                    <input id="leian" type="radio" value="extern">
+                </div>
+                <label for="club">Grade Level:</label>
+                <select id="club">
+                    <option value="Pisay.XYZ">Pisay.XYZ</option>
+                    <option value="Sapienara">Sapienara</option>
+                    <option value="Alianti">Alianti</option>
+                    <option value="Labuyo">Labubu</option>
+                    <option value="Kislap">Kislap</option>
+                </select>
+            </fieldset>
+            <label for="why">Why do you want to join?: </label>
+            <textarea id="why" row="67" col="20" onblur="StyleCheck()"></textarea>
+            <button id="submitted" type="submit" value="submit">Submit</button>
+            <button id="resetted" type="reset" value="reset">Reset</button>
+        </form>
+        <script>
+            function confirmSubmit() {
+                var confsubm = confirm("Are you sure that you want to submit? Have you double checked and filled out all of the necessary information?")
+                return confsubm;
+            }
+
+            function confirmReset() {
+                var confres = confirm("Are you sure you want to reset? This will clear all of your progress.")
+                return confres;
+            }
+
+            function StyleCheck(elem) {
+                if (elem.value.trim() !== '' ) {
+                    elem.classname = 'blurred';
+                }
+                else {
+                    elem.classname = null;
+                }
+            }
+        </script>
+    </body>
+</html>
