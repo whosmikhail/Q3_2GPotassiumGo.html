@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <style>
+            form {
+                border: 4px dashed black;
+                border-radius: 4px;
+            }
+
+            body {
+                font:bold;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            h1, h2 {
+                text-align: center;
+            }
+
+            form {
+                width: 40%;
+                margin: auto;
+            }
+    
+        </style>
+    </head>
+    <body onload="update()">
+    <form id="form">
+        <fieldset id="movie-adding">
+            <h1>Add a Movie</h1>
+        <label for="title">Title:</label><br>
+        <input type="text" id="title"><br><br>
+        <label for="year">Year:</label><br>
+        <input type="number" id="year"><br><br>
+        <label for="genre">Genre:</label><br>
+        <select id="genre">
+            <option value="Action">Action</option>
+            <option value="Horror">Horror</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="Drama">Drama</option>
+            <option value="Romance">Romance</option>
+        </select><br><br>
+        <label for="stars">Rating:</label><br>
+        <div id="stars">
+            <span> &#9734 </span>
+            <span> &#9734 </span>
+            <span> &#9734 </span>
+            <span> &#9734 </span>
+            <span> &#9734 </span>
+        </div>
+            <br>
+            <button type="submit" id="submit">Add a Movie</button>
+            <br>
+
+        <h2>Movie List:</h2><br>
+        <div id="movie-list">
+        </fieldset>
+
+        </div>
+    </form>
+    <script>
+        const form = document.getElementById('form')
+        function Movie(title, year, genre, rating) {
+            this.title = title;
+            this.year = year;
+            this.genre = genre;
+            this.rating = rating;
+        }
+
+        let NewMovie;
+        const MovieList = document.getElementById('movie-list')
+        let movieTitle, movieYear, movieGenre, movieRating, movieStars, temp;
+        let counter = 0;
+        let list;
+        const stars = document.getElementById('stars')
+
+        function submitting() {
+            movieTitle = document.getElementById('title').value;
+            movieYear = document.getElementById('year').value;
+            movieGenre = document.getElementById('genre').value;
+            counter++;
+
+            NewMovie = new Movie(movieTitle, movieYear, movieGenre, movieRating);
+            localStorage.setItem(counter, JSON.stringify(NewMovie));
+
+            list = document.createElement('li')
+            list.innerHTML = movieTitle + ' ( ' + movieYear + ' ) ' + ' - ' + movieGenre + ', Rating: ';
+            for (let i = 0; i < movieRating; i++) {
+                list.innerHTML += '&#11088';
+            }
+            MovieList.appendChild(list)
+
+        }
+
+        stars.addEventListener('click', function(rating){
+            movieRating = 0;
+            movieStars = stars.children;
+            for (i = 0; i < movieStars.length; i++) {
+                if (movieStars[i] === event.target) {
+                    movieStars[i].innerHTML = '&#11088;'
+                    movieRating = i + 1;
+                    break;
+                }
+                else {
+                    movieStars[i].innerHTML = '&#11088;'
+                }
+            }
+            
+        }) 
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitting();
+        })
+
+        function update() {
+            counter = 0;
+            while (counter < localStorage.length) {
+                counter++;
+                if (localStorage.getItem(counter)) {
+                    temp = JSON.parse(localStorage.getItem(counter));
+                    
+                    list = document.createElement('li')
+                    list.innerHTML = temp.title + ' ( ' + temp.year + ' ) ' + ' - ' + temp.genre + ', Rating: ';
+                    for (let i = 0; i < temp.rating; i++) {
+                        list.innerHTML += '&#11088';
+                    }
+
+                    MovieList.appendChild(list)
+                }
+            }
+        }
+    </script>
+    </body>
+</html>
