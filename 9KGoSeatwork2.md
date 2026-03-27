@@ -110,5 +110,7 @@ The notice appears above the content due to its higher z-index. If they were swa
     It views the parent element as the body, the parent element being changed would also result in it changing most of the time.
 
     c. How do you differentiate sticky from fixed (you can research on sticky)?
+    sticky behaves originally like a 'position: relative', then behaves like a fixed once the user scrolls based on the top-bottom-left-right instructions.
 
     d. If you were designing a webpage for a school event, how might you use positioning to highlight important information? Please give concrete examples.
+    I would use fixed/absolute for notable things that are important. This would make the user unable to ignore the important information.
